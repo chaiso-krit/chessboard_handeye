@@ -1,0 +1,22 @@
+<launch>
+
+
+  <arg name="cameraTopic"  default="/usb_cam/image_raw" />
+  <arg name="cameraInfoTopic"  default="/usb_cam/camera_info" />
+  <arg name="cameraFrame"  default="/usb_cam" />
+  <arg name="chessboardWidth" default="7"/>
+  <arg name="chessboardHeight" default="7"/>
+  <arg name="squareSize" default="0.025"/>
+  <arg name="useNormalizeImage" default="false"/>
+
+  <node pkg="camera_transform_publisher" type="chessboard_publisher" name="chessboard_publisher" output="screen">
+      <param name="cameraTopic" type="str"  value="$(arg cameraTopic)" />
+      <param name="cameraInfoTopic" type="str"  value="$(arg cameraInfoTopic)" />
+      <param name="chessboardWidth"       type="int" value="$(arg chessboardWidth)"/>
+      <param name="chessboardHeight"      type="int" value="$(arg chessboardHeight)"/>
+      <param name="squareSize"    type="double"  value="$(arg squareSize)" />
+      <param name="cameraLinkName"    type="str"  value="$(arg cameraFrame)" />
+      <param name="useNormalizeImage"    type="bool"  value="$(arg useNormalizeImage)" />
+  </node>
+
+</launch>
