@@ -1,0 +1,9 @@
+<launch>
+  <include file="$(find chessboard_handeye)/launch/chessboard_handeye.launch">
+
+    <arg name="marker_parent_frame" value="/base"/>
+    <arg name="camera_parent_frame" value="/ee_link"/>
+
+    <arg name="camera" value="/usb_cam"/>
+  </include>
+</launch>

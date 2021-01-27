@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>chessboard_handeye</name>
+  <version>0.0.0</version>
+  <description>The chessboard_handeye package</description>
+
+  <maintainer email="chaiso.krit@gmail.com">krit</maintainer>
+
+
+  <license>MIT</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>visp_hand2eye_calibration</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_export_depend>rospy</build_export_depend>
+  <build_export_depend>tf</build_export_depend>
+  <build_export_depend>visp_hand2eye_calibration</build_export_depend>
+  <build_export_depend>geometry_msgs</build_export_depend>
+  <exec_depend>rospy</exec_depend>
+  <exec_depend>tf</exec_depend>
+  <exec_depend>visp_hand2eye_calibration</exec_depend>
+  <exec_depend>geometry_msgs</exec_depend>
+
+  <export>
+
+  </export>
+</package>

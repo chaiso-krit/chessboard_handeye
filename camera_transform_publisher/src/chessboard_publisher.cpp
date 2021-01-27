@@ -39,6 +39,8 @@ class ChessBoardExtractor
     image_transport::ImageTransport it;
     image_transport::Subscriber image_sub_rgb;
 
+    ros::Publisher transformPub;
+
     sensor_msgs::Image rgb_msg;
 
     tf::TransformBroadcaster br;
@@ -81,6 +83,8 @@ public:
         if (useNormalize) {
 		detectChessboardFlag = detectChessboardFlag | cv::CALIB_CB_NORMALIZE_IMAGE;
 	}
+
+	transformPub = nh_.advertise<geometry_msgs::TransformStamped>("transform", 100);
     }
 
     void imageCb_rgb(const sensor_msgs::ImageConstPtr &msg)
@@ -216,10 +220,12 @@ public:
         transform.setOrigin(origin);
         transform.setRotation(tfqt);
 
-        br.sendTransform(tf::StampedTransform(transform,
-                                              ros::Time::now(),
-                                              camera_link,
-                                              ar_marker));
+	tf::StampedTransform stampedTransform(transform, ros::Time::now(), camera_link, ar_marker);
+	geometry_msgs::TransformStamped transformMsg;
+        tf::transformStampedTFToMsg(stampedTransform, transformMsg);
+
+        br.sendTransform(stampedTransform);
+	transformPub.publish(transformMsg);
     }
 
     cv::Mat setBoardCornerPositions(Size boardSize, float squareSize)
@@ -295,7 +301,7 @@ int main(int argc, char **argv)
     boardSize.width = chessboardWidth;
     boardSize.height = chessboardHeight;
 
-    ros::NodeHandle nh2;
+    ros::NodeHandle nh2("~");
     ChessBoardExtractor ce(nh2, boardSize, squareSize, ci.intrinsic, ci.distortion, cameraTopic, useNormalize);
     cout << "\e[1;33m"
          << "Chessboard publisher is ready."
