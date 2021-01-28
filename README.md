@@ -1,6 +1,7 @@
 # chessboard_handeye
 | **`Ubuntu 1804 & ROS Melodic Morenia`** |  
 
+This repository contains python script for handeye calibration using chessboard through ROS system.
 
 * **brio_ros**   
 Camera config & launch file for Logitech Brio.  
